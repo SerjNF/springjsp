@@ -6,11 +6,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-${home}
+
+<form:form action="add" modelAttribute="contact" method="post">
+    <form:input path="name"/>
+    <form:input path="phone"/>
+    <input type="submit" value="user"/>
+</form:form>
+
+<div class="contacts">
+
+</div>
 </body>
 </html>
