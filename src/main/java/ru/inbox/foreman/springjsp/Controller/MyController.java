@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import ru.inbox.foreman.springjsp.Model.Contact;
+import ru.inbox.foreman.springjsp.Model.ContactEntity;
 
 
 @Controller
-public class HomeController {
+public class MyController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView home(ModelMap modelMap){
-      //  modelMap.put("home", "Page Home");
-        return new ModelAndView("home", "contact", new Contact());
+    public ModelAndView index(ModelMap modelMap){
+      //  modelMap.put("index", "Page Home");
+        return new ModelAndView("home", "contact", new ContactEntity());
     }
 }

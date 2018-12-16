@@ -17,8 +17,10 @@
 
 <form:form action="add" modelAttribute="contact" method="post">
     <form:input path="name"/>
+    <form:input path="lastName"/>
+    <form:input path="email"/>
     <form:input path="phone"/>
-    <input type="submit" value="user"/>
+    <input type="submit" value="Enter"/>
 </form:form>
 
 <div class="contacts">
