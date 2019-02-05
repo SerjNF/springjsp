@@ -30,10 +30,14 @@ import java.util.Properties;
 
     public class MVCConfig {
 
-    @Autowired
-    private Environment env;
+    private final Environment env;
 
-        @Bean
+    @Autowired
+    public MVCConfig(Environment env) {
+        this.env = env;
+    }
+
+    @Bean
         public InternalResourceViewResolver resourceViewResolver() {
             InternalResourceViewResolver resolver = new InternalResourceViewResolver();
             resolver.setSuffix(".jsp");
@@ -87,11 +91,13 @@ import java.util.Properties;
         return sf;
     }
 
-//    @Autowired
-//    @Bean(name = "transactionManager")
-//    public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-//        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
-//
-//        return transactionManager;
-//    }
+/*
+@Autowired
+@Bean(name = "transactionManager")
+public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
+
+return transactionManager;
+}
+*/
 }
