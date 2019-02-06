@@ -1,18 +1,28 @@
 package ru.inbox.foreman.springjsp.Model;
 
 public class Contact {
-    private int id;
+
+
+    private int contactId;
     private String name;
     private String lastName;
     private String email;
     private String phone;
 
- public int getId() {
-        return id;
+    public Contact(int contactId, String name, String lastName, String email, String phone) {
+        this.contactId = contactId;
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getContactId() {
+        return contactId;
+    }
+
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 
     public String getName() {

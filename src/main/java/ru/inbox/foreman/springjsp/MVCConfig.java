@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -21,14 +22,14 @@ import java.util.Properties;
 
 
 @Configuration
-    @EnableWebMvc
+@EnableWebMvc
 
-    @EnableAutoConfiguration(exclude = { //
-            DataSourceAutoConfiguration.class, //
-            DataSourceTransactionManagerAutoConfiguration.class, //
-            HibernateJpaAutoConfiguration.class })
+@EnableAutoConfiguration(exclude = { //
+        DataSourceAutoConfiguration.class, //
+        DataSourceTransactionManagerAutoConfiguration.class, //
+        HibernateJpaAutoConfiguration.class})
 
-    public class MVCConfig {
+public class MVCConfig {
 
     private final Environment env;
 
@@ -38,31 +39,31 @@ import java.util.Properties;
     }
 
     @Bean
-        public InternalResourceViewResolver resourceViewResolver() {
-            InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-            resolver.setSuffix(".jsp");
-            resolver.setPrefix("WEB-INF/pages/");
-            resolver.setViewClass(JstlView.class);
-            return resolver;
-        }
+    public InternalResourceViewResolver resourceViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setSuffix(".jsp");
+        resolver.setPrefix("WEB-INF/pages/");
+        resolver.setViewClass(JstlView.class);
+        return resolver;
+    }
 
 
-        @Bean(name = "dataSource")
-        public DataSource getDataSource() {
-            DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    @Bean(name = "dataSource")
+    public DataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-            // See: application.properties
-            dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty("spring.datasource.driver-class-name")));
-            dataSource.setUrl(Objects.requireNonNull(env.getProperty("spring.datasource.url")));
-            dataSource.setUsername(env.getProperty("spring.datasource.username"));
-            dataSource.setPassword(env.getProperty("spring.datasource.password"));
+        // See: application.properties
+        dataSource.setDriverClassName(Objects.requireNonNull(env.getProperty("spring.datasource.driver-class-name")));
+        dataSource.setUrl(Objects.requireNonNull(env.getProperty("spring.datasource.url")));
+        dataSource.setUsername(env.getProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.password"));
 
-            System.out.println("## getDataSource: " + dataSource);
+        System.out.println("## getDataSource: " + dataSource);
 
-            return dataSource;
-        }
+        return dataSource;
+    }
 
-    @Autowired
+   // @Autowired
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
         Properties properties = new Properties();
@@ -81,7 +82,7 @@ import java.util.Properties;
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
-        factoryBean.setPackagesToScan(new String[] { "" });
+        factoryBean.setPackagesToScan(new String[]{""});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(properties);
         factoryBean.afterPropertiesSet();
@@ -91,13 +92,13 @@ import java.util.Properties;
         return sf;
     }
 
-/*
-@Autowired
-@Bean(name = "transactionManager")
-public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 
-return transactionManager;
-}
-*/
+    @Autowired
+    @Bean(name = "transactionManager")
+    public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
+
+        return transactionManager;
+    }
+
 }

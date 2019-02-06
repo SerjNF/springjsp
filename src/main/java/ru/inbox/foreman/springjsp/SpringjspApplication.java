@@ -12,6 +12,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 public class SpringjspApplication {
 
+
     public static void main(String[] args) {
         SpringApplication.run(SpringjspApplication.class, args);
     }

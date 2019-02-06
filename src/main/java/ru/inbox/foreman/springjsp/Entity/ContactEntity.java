@@ -4,15 +4,15 @@ package ru.inbox.foreman.springjsp.Entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name= "Contact")
+@Table(name = "Contact")
 public class ContactEntity {
 
-    public Long getId() {
-        return id;
+    public int getContactId() {
+        return contactId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 
     public String getName() {
@@ -49,21 +49,20 @@ public class ContactEntity {
 
     @Id
     @GeneratedValue
-    @Column(name="contactId", nullable = false)
-    private Long id;
+    @Column(name = "contactId", nullable = false)
+    private int contactId;
 
-    @Column(name="name", length = 255)
+    @Column(name = "name", length = 255)
     private String name;
 
-    @Column(name="lastName", length = 255)
+    @Column(name = "lastName", length = 255)
     private String lastName;
 
-    @Column(name="email", length = 255)
+    @Column(name = "email", length = 255)
     private String email;
 
-    @Column(name="phone", length = 255)
+    @Column(name = "phone", length = 255)
     private String phone;
-
 
 
 }

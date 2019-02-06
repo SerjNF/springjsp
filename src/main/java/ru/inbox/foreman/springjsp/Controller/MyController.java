@@ -1,21 +1,30 @@
 package ru.inbox.foreman.springjsp.Controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
-import ru.inbox.foreman.springjsp.Entity.ContactEntity;
-//import ru.inbox.foreman.springjsp.Model.Contact;
-
+import ru.inbox.foreman.springjsp.DAO.ContactDAO;
+import ru.inbox.foreman.springjsp.Model.Contact;
+import java.util.List;
 
 
 @Controller
 public class MyController {
 
+    private final ContactDAO contactDAO;
+
+    @Autowired
+    public MyController(ContactDAO contactDAO) {
+        this.contactDAO = contactDAO;
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView index(ModelMap modelMap){
-      //  modelMap.put("index", "Page Home");
-        return new ModelAndView("home", "contact", new ContactEntity());
+    public String index(Model model) {
+
+        List<Contact> listContact = contactDAO.listContactInfo();
+        model.addAttribute("listContact", listContact);
+        return "home";
     }
 }
