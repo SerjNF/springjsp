@@ -24,13 +24,15 @@
         <th>phone</th>
     </tr>
 
-        <c:forEach items='${listContact}' var="listContact" >
-    <tr> <td>${listContact.contactId}</td>
-        <td>${listContact.name}</td>
-        <td>${listContact.lastName}</td>
-        <td>${listContact.email}</td>
-        <td>${listContact.phone}</td></tr>
-        </c:forEach>
+    <c:forEach items='${listContact}' var="listContact">
+        <tr>
+            <td>${listContact.contactId}</td>
+            <td>${listContact.name}</td>
+            <td>${listContact.lastName}</td>
+            <td>${listContact.email}</td>
+            <td>${listContact.phone}</td>
+        </tr>
+    </c:forEach>
 </table>
 
 <%--<form:form action="add" modelAttribute="contact" method="post">--%>

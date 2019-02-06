@@ -44,6 +44,7 @@ public class MVCConfig {
         resolver.setSuffix(".jsp");
         resolver.setPrefix("WEB-INF/pages/");
         resolver.setViewClass(JstlView.class);
+
         return resolver;
     }
 
@@ -63,7 +64,7 @@ public class MVCConfig {
         return dataSource;
     }
 
-   // @Autowired
+
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
         Properties properties = new Properties();
@@ -75,10 +76,6 @@ public class MVCConfig {
                 Objects.requireNonNull(env.getProperty("spring.jpa.properties.hibernate.current_session_context_class")));
 
 
-        // Fix Postgres JPA Error:
-        // Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented.
-        // properties.put("hibernate.temp.use_jdbc_metadata_defaults",false);
-
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
         // Package contain entity classes
@@ -88,7 +85,9 @@ public class MVCConfig {
         factoryBean.afterPropertiesSet();
         //
         SessionFactory sf = factoryBean.getObject();
+
         System.out.println("## getSessionFactory: " + sf);
+
         return sf;
     }
 

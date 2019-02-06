@@ -7,6 +7,23 @@ import javax.persistence.*;
 @Table(name = "Contact")
 public class ContactEntity {
 
+    @Id
+    @GeneratedValue
+    @Column(name = "contactId", nullable = false)
+    private int contactId;
+
+    @Column(name = "name", length = 255)
+    private String name;
+
+    @Column(name = "lastName", length = 255)
+    private String lastName;
+
+    @Column(name = "email", length = 255)
+    private String email;
+
+    @Column(name = "phone", length = 255)
+    private String phone;
+
     public int getContactId() {
         return contactId;
     }
@@ -46,23 +63,4 @@ public class ContactEntity {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-    @Id
-    @GeneratedValue
-    @Column(name = "contactId", nullable = false)
-    private int contactId;
-
-    @Column(name = "name", length = 255)
-    private String name;
-
-    @Column(name = "lastName", length = 255)
-    private String lastName;
-
-    @Column(name = "email", length = 255)
-    private String email;
-
-    @Column(name = "phone", length = 255)
-    private String phone;
-
-
 }
