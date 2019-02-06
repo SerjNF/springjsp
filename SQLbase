@@ -1,0 +1,14 @@
+CREATE TABLE Contact
+(
+	contactId int auto_increment primary key,
+	name varchar(255) null,
+	lastName varchar(255) null,
+	email varchar(255) null,
+	phone varchar(255) null
+);
+
+INSERT INTO Contact
+    (name, lastName, email, phone) VALUES
+    ('Serg', 'Fadeev', 'foreman@inbxo.ru', '89658215556'),
+    ('S', 'F', 'f.ru', '89658215555'),
+    ('Nata', 'Fadeeva', 'fadeevanb@mail.ru', '89658215557');
