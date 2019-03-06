@@ -1,28 +1,37 @@
-package ru.inbox.foreman.springjsp.Entity;
+package ru.inbox.foreman.springjsp.model;
 
 
-import javax.persistence.*;
+import ru.inbox.foreman.springjsp.entity.ContactEntity;
 
-@Entity
-@Table(name = "Contact")
-public class ContactEntity {
+public class Contact {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "contactId", nullable = false)
     private int contactId;
 
-    @Column(name = "name", length = 255)
     private String name;
 
-    @Column(name = "lastName", length = 255)
     private String lastName;
 
-    @Column(name = "email", length = 255)
     private String email;
 
-    @Column(name = "phone", length = 255)
     private String phone;
+
+    public Contact(String name, String lastName, String email, String phone) {
+        this.name = name;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
+    }
+
+    public Contact(ContactEntity contactEntity){
+        this.name = contactEntity.getName();
+        this.lastName = contactEntity.getLastName();
+        this.contactId = contactEntity.getContactId();
+        this.email = contactEntity.getEmail();
+        this.phone = contactEntity.getPhone();
+    }
+
+    public Contact() {
+    }
 
     public int getContactId() {
         return contactId;

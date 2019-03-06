@@ -1,4 +1,4 @@
-package ru.inbox.foreman.springjsp;
+package ru.inbox.foreman.springjsp.config;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,42 +12,25 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
-
 @Configuration
-@EnableWebMvc
-
 @EnableAutoConfiguration(exclude = { //
         DataSourceAutoConfiguration.class, //
         DataSourceTransactionManagerAutoConfiguration.class, //
         HibernateJpaAutoConfiguration.class})
 
-public class MVCConfig {
+public class ConfigDB {
 
     private final Environment env;
 
     @Autowired
-    public MVCConfig(Environment env) {
+    public ConfigDB(Environment env) {
         this.env = env;
     }
-
-    @Bean
-    public InternalResourceViewResolver resourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setSuffix(".jsp");
-        resolver.setPrefix("WEB-INF/pages/");
-        resolver.setViewClass(JstlView.class);
-
-        return resolver;
-    }
-
 
     @Bean(name = "dataSource")
     public DataSource getDataSource() {
@@ -64,7 +47,6 @@ public class MVCConfig {
         return dataSource;
     }
 
-
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws Exception {
         Properties properties = new Properties();
@@ -72,9 +54,7 @@ public class MVCConfig {
         // See: application.properties
         properties.put("hibernate.dialect", Objects.requireNonNull(env.getProperty("spring.jpa.properties.hibernate.dialect")));
         properties.put("hibernate.show_sql", Objects.requireNonNull(env.getProperty("spring.jpa.show-sql")));
-        properties.put("current_session_context_class", //
-                Objects.requireNonNull(env.getProperty("spring.jpa.properties.hibernate.current_session_context_class")));
-
+        properties.put("current_session_context_class", Objects.requireNonNull(env.getProperty("spring.jpa.properties.hibernate.current_session_context_class")));
 
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 
@@ -95,9 +75,8 @@ public class MVCConfig {
     @Autowired
     @Bean(name = "transactionManager")
     public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);
 
-        return transactionManager;
+        return new HibernateTransactionManager(sessionFactory);
     }
 
 }
