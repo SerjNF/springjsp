@@ -1,6 +1,6 @@
 package ru.inbox.foreman.springjsp.service;
 
-import org.apache.tomcat.jni.User;
+import ru.inbox.foreman.springjsp.model.User;
 
 public interface UserService {
     User getUser(String login);

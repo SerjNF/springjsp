@@ -27,7 +27,7 @@
             <th>email</th>
             <th>phone</th>
             <th>удаление</th>
-            3
+
         </tr>
 
         <c:forEach items='${listContact}' var="listContact" varStatus="counter" begin="1">

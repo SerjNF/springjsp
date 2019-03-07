@@ -34,6 +34,16 @@ public class MyController {
         return "home";
     }
 
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
+
+//        model.addAttribute("contact", new ContactEntity());
+//        List listContact = contactService.listContactInfo();
+//        model.addAttribute("listContact", listContact);
+        return "login";
+    }
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addContact(@ModelAttribute("contact") ContactEntity contact, BindingResult result) {
         contactService.addContact(contact);
