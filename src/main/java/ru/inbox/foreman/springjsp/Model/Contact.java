@@ -1,20 +1,36 @@
-package ru.inbox.foreman.springjsp.Model;
+package ru.inbox.foreman.springjsp.model;
+
+
+import ru.inbox.foreman.springjsp.entity.ContactEntity;
 
 public class Contact {
 
-
     private int contactId;
+
     private String name;
+
     private String lastName;
+
     private String email;
+
     private String phone;
 
-    public Contact(int contactId, String name, String lastName, String email, String phone) {
-        this.contactId = contactId;
+    public Contact(String name, String lastName, String email, String phone) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
         this.phone = phone;
+    }
+
+    public Contact(ContactEntity contactEntity){
+        this.name = contactEntity.getName();
+        this.lastName = contactEntity.getLastName();
+        this.contactId = contactEntity.getContactId();
+        this.email = contactEntity.getEmail();
+        this.phone = contactEntity.getPhone();
+    }
+
+    public Contact() {
     }
 
     public int getContactId() {
@@ -57,4 +73,3 @@ public class Contact {
         this.phone = phone;
     }
 }
-
